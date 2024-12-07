@@ -1,0 +1,6 @@
+// 名前を変更したのでInspectorの値参照が外れています
+rush
+// 名前を変更したのでInspectorの値参照が外れています
+rush
+// 名前を変更したのでInspectorの値参照が外れています
+rush

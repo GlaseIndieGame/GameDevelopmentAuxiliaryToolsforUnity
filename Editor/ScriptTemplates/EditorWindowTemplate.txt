@@ -1,0 +1,14 @@
+using UnityEditor;
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+	public class #SCRIPTNAME# : EditorWindow
+	{
+        [MenuItem("Window/CustomWindow/#SCRIPTNAME#")]
+    	private static void Window()
+    	{
+        	var window = GetWindow<#SCRIPTNAME#>();
+        	window.Show();
+    	}
+	}
+#ROOTNAMESPACEEND#

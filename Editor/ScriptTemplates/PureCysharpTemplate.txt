@@ -1,0 +1,8 @@
+using System;
+
+#ROOTNAMESPACEBEGIN#
+	public class #SCRIPTNAME#
+	{
+		
+	}
+#ROOTNAMESPACEEND#

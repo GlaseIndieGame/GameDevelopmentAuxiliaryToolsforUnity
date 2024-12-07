@@ -1,0 +1,31 @@
+using System;
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+	public class #SCRIPTNAME# : MonoBehaviour
+	{
+		private static #SCRIPTNAME# _instance = null;
+		public static #SCRIPTNAME# Instance => _instance;
+
+		private void Awake()
+		{
+			CreateSingletonInstance();
+		}
+
+		/// <summary>
+        /// シングルトンのインスタンスを生成します
+        /// </summary>
+        /// <returns>生成成功</returns>
+        private bool CreateSingletonInstance()
+        {
+            if (_instance != null)
+            {
+                Destroy(this.gameObject);
+                return false;
+            }
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            return true;
+        }
+	}
+#ROOTNAMESPACEEND#
