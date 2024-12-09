@@ -5,9 +5,16 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Text;
 
 namespace GDAT.Editor
 {
+    enum EncodingType
+    {
+        SHIFT_JIS = 0,
+        UTF_8,
+        UNICODE,
+    }
     /// <summary>
     /// テキスト置換エディター
     /// </summary>
@@ -31,6 +38,11 @@ namespace GDAT.Editor
         {
             new()
         };
+
+        private Encoding[] _encodings;
+
+        [SerializeField]
+        private EncodingType _currentEncodingType = EncodingType.SHIFT_JIS;
 
         private int _findIndex = 0;
 
@@ -70,6 +82,15 @@ namespace GDAT.Editor
 
             var serializeTarget = new SerializedObject(this);
             rootVisualElement.Bind(serializeTarget);
+
+            _encodings = new Encoding[3]
+            {
+                Encoding.GetEncoding("shift-jis"),
+                Encoding.UTF8,
+                Encoding.Unicode,
+            };
+            var encodingTypeField = root.Q<EnumField>("encodingTypeField");
+            encodingTypeField.RegisterValueChangedCallback(changeEvent => UpdateResultText());
 
             var pathList = root.Q<ListView>("targetPaths");
             pathList.selectedIndicesChanged += collection =>
@@ -166,13 +187,13 @@ namespace GDAT.Editor
                 {
                     _findIndex = _targetPaths.Count - 1;
                 }
-                string text = System.IO.File.ReadAllText(_targetPaths[_findIndex]);
+                string text = System.IO.File.ReadAllText(_targetPaths[_findIndex], _encodings[(int)_currentEncodingType]);
                 foreach (var item in _replaceSettings)
                 {
                     if (string.IsNullOrEmpty(item.OldText)) { continue; }
                     text = text.Replace(item.OldText, item.NewText);
                 }
-                rootVisualElement.Q<Label>("resultText").text = text;
+                rootVisualElement.Q<TextField>("resultText").value = text;
             }
         }
 
@@ -199,7 +220,7 @@ namespace GDAT.Editor
         {
             foreach (var path in _targetPaths)
             {
-                string targetText = System.IO.File.ReadAllText(path);
+                string targetText = System.IO.File.ReadAllText(path, _encodings[(int)_currentEncodingType]);
 
                 foreach (var item in _replaceSettings)
                 {
@@ -207,7 +228,7 @@ namespace GDAT.Editor
                     targetText = targetText.Replace(item.OldText, item.NewText);
                 }
 
-                System.IO.File.WriteAllText(path, targetText);
+                System.IO.File.WriteAllText(path, targetText, _encodings[(int)_currentEncodingType]);
             }
 
             AssetDatabase.Refresh();
