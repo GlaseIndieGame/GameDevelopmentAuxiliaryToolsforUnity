@@ -166,6 +166,16 @@ namespace GDAT.Editor
                 listContainer.Add(listView);
             }
 
+
+            var imguiContainer = root.Q<IMGUIContainer>("selectableLabelContainer");
+
+            imguiContainer.onGUIHandler = () =>
+            {
+                var style = new GUIStyle();
+                style.stretchHeight = true;
+                EditorGUILayout.SelectableLabel("Œ‹‰Ê‚ð•\Ž¦", style);
+            };
+
             var replaceButton = root.Q<Button>("replaceButton");
             replaceButton.clicked += TargetTextReplace;
 
@@ -193,7 +203,15 @@ namespace GDAT.Editor
                     if (string.IsNullOrEmpty(item.OldText)) { continue; }
                     text = text.Replace(item.OldText, item.NewText);
                 }
-                rootVisualElement.Q<TextField>("resultText").value = text;
+
+                var imguiContainer = rootVisualElement.Q<IMGUIContainer>("selectableLabelContainer");
+
+                imguiContainer.onGUIHandler = () =>
+                {
+                    var style = new GUIStyle();
+                    style.stretchHeight = true;
+                    EditorGUILayout.SelectableLabel(text, style);
+                };
             }
         }
 

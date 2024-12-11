@@ -6,11 +6,19 @@ Unityでの快適なゲーム開発を支援するエディタツールです。
 ご使用される場合はUnityツールバーの
 Tools/GameDevelopmentAuxiliaryToolsforUnity.Editor/に存在する同様の名称をクリックすることで使用することができます。
 
+![ツールバーイメージ](Images/ToolBarRoot.png)
+
 #### ApplyBestDummyFileUsage
 Assetsフォルダ以下におけるdummyファイルの取り扱いを便利に行えるツールです。
 
 空のフォルダにはdummyファイルを追加・
 dummyファイル以外があるフォルダからは削除を行います。
+
+このようなファイルがあったとき
+![参考１](Images/DUMMY_1.png)
+
+生成
+![参考２](Images/DUMMY_2.png)
 
 有用な使い方の例
 - 進捗共有前
@@ -20,12 +28,18 @@ dummyファイル以外があるフォルダからは削除を行います。
 ProjectViewにて選択されているフォルダ(複数可)に
 汎用的なフォルダ(Scripts/Textures/etc...)を追加します。
 
+選択してから
+![参考１](Images/GENERIC_1.png)
+
+生成
+![参考2](Images/GENERIC_2.png)
+
 有用な使い方の例
 - プロジェクト立ち上げ時の一括フォルダ作成
 - 開発メンバー加入時
 
 #### SpecialFolders
-Assets以下に特別な意味を持つフォルダ(Resources/StreamingAssets/etc...)を追加します。
+Assets以下に特別な意味を持つフォルダ(Resources, StreamingAssets, etc...)を追加します。
 
 有用な使い方の例
 - 名前のタイプミス防止
@@ -40,6 +54,8 @@ UnityEditorの再起動。
 #### TextReplaceEditorWindow
 ProjectViewにて選択されているフォルダ(複数可)の
 テキストに含まれる指定文字列を指定置き換え先文字列に置き換えます。
+
+![参考１](Images/TEXT_REPLACE_1.png)
 
 有用な使い方の例
 - スペルミスによる複数の変数を改名時

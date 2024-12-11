@@ -1,7 +1,0 @@
-# すべてを無視
-/GameDevelopmentAuxiliaryToolsforUnity/*
-!/GameDevelopmentAuxiliaryToolsforUnity/Assets/
-/GameDevelopmentAuxiliaryToolsforUnity/Assets/*
-!GameDevelopmentAuxiliaryToolsforUnity/Assets/Delivery/
-# Deliveryフォルダの中身を無視しない
-!/GameDevelopmentAuxiliaryToolsforUnity/Assets/Delivery/**/*
