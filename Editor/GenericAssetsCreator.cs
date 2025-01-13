@@ -12,12 +12,13 @@ namespace GDAT.Editor
     {
         private const string ASSETS_MENU_ROOT = @"Assets/Tools/GDATforUnity/";
         private const string SPECIAL_FOLDERPATH = ASSETS_MENU_ROOT + @"Add Special Folders/";
+        private const int MENU_PRIORITY = 20;
 
         /// <summary>
         /// 選択フォルダ配下に汎用的なフォルダ(Animations,Audios等)を作成します。
         /// 既に存在するフォルダは変更しません。
         /// </summary>
-        [MenuItem(ASSETS_MENU_ROOT + "Add Generic Folders", priority = 15)]
+        [MenuItem(ASSETS_MENU_ROOT + "Add Generic Folders", priority = MENU_PRIORITY)]
         private static void CreateGenericFoldersUnderSelectedFolders()
         {
             foreach (var asset in Selection.objects)
@@ -61,19 +62,19 @@ namespace GDAT.Editor
         #region 特別フォルダ生成メソッド
 
         /// <summary> 特別なフォルダを生成します </summary>
-        [MenuItem(SPECIAL_FOLDERPATH + "Resources", priority = 15)]
+        [MenuItem(SPECIAL_FOLDERPATH + "Resources", priority = MENU_PRIORITY)]
         private static void ResourcesFolderCreate() => CreateDirectoryWithDummyFile(@"Assets/Resources", true);
         /// <summary> 特別なフォルダを生成します </summary>
-        [MenuItem(SPECIAL_FOLDERPATH + "Editor", priority = 15)]
+        [MenuItem(SPECIAL_FOLDERPATH + "Editor", priority = MENU_PRIORITY)]
         private static void EditorFolderCreate() => CreateDirectoryWithDummyFile(@"Assets/Editor", true);
         /// <summary> 特別なフォルダを生成します </summary>
-        [MenuItem(SPECIAL_FOLDERPATH + "Gizmos", priority = 15)]
+        [MenuItem(SPECIAL_FOLDERPATH + "Gizmos", priority = MENU_PRIORITY)]
         private static void GizmosFolderCreate() => CreateDirectoryWithDummyFile(@"Assets/Gizmos", true);
         /// <summary> 特別なフォルダを生成します </summary>
-        [MenuItem(SPECIAL_FOLDERPATH + "Plugins", priority = 15)]
+        [MenuItem(SPECIAL_FOLDERPATH + "Plugins", priority = MENU_PRIORITY)]
         private static void PluginsFolderCreate() => CreateDirectoryWithDummyFile(@"Assets/Plugins", true);
         /// <summary> 特別なフォルダを生成します </summary>
-        [MenuItem(SPECIAL_FOLDERPATH + "StreamingAssets", priority = 15)]
+        [MenuItem(SPECIAL_FOLDERPATH + "StreamingAssets", priority = MENU_PRIORITY)]
         private static void StreamingAssetsFolderCreate() => CreateDirectoryWithDummyFile(@"Assets/StreamingAssets", true);
 
         #endregion
@@ -96,39 +97,48 @@ namespace GDAT.Editor
         }
 
         /// <summary>
-        /// 選択されたフォルダ内で適切なダミーファイルの使用方法を適用
+        /// 指定パス内に適切なダミーファイルの使用状態を適用
+        /// </summary>
+        /// <param name="path"></param>
+        private static void ApplyBestDummyFileUsageWithPath(string path)
+        {
+            string dummyFilePath = $@"{path}/dummy.txt";
+
+            if (File.Exists(dummyFilePath))
+            {
+                // メタファイルがあるため2より大きいときに削除
+                if (Directory.GetFiles(path).Length > 2)
+                {
+                    FileUtil.DeleteFileOrDirectory(dummyFilePath);
+                }
+                return;
+            }
+            if (Directory.GetFiles(path).Length == 0)
+            {
+                using (File.Create(dummyFilePath)) { }
+            }
+        }
+
+        /// <summary>
+        /// 選択されたフォルダ内に適切なダミーファイルの使用状態を適用
         /// フォルダ内にダミーファイル以外がある=消す
         /// フォルダ内にファイルがない=作る
         /// </summary>
-        [MenuItem(ASSETS_MENU_ROOT + "ApplyBestDummyFileUsage", priority = 15)]
+        [MenuItem(ASSETS_MENU_ROOT + "ApplyBestDummyFileUsage", priority = MENU_PRIORITY)]
         private static void ApplyBestDummyFileUsage()
         {
             foreach (var asset in Selection.objects)
             {
                 if (asset is DefaultAsset)
                 {
-                    string rootFolderPath = AssetDatabase.GetAssetPath(asset);
+                    string rootDirectory = AssetDatabase.GetAssetPath(asset);
+                    ApplyBestDummyFileUsageWithPath(rootDirectory);
 
-                    string[] subdirectories = Directory.GetDirectories(rootFolderPath, "*", SearchOption.AllDirectories);
+                    string[] subDirectories = Directory.GetDirectories(rootDirectory, "*", SearchOption.AllDirectories);
 
-                    foreach (string subdirectory in subdirectories)
+                    foreach (string subDirectory in subDirectories)
                     {
-                        string dummyFilePath = $@"{subdirectory}/dummy.txt";
-
-                        if (File.Exists(dummyFilePath))
-                        {
-                            if (Directory.GetFiles(subdirectory).Length > 2)
-                            {
-                                UnityEngine.Debug.Log($"{subdirectory}からダミーファイルを削除！");
-                                FileUtil.DeleteFileOrDirectory(dummyFilePath);
-                            }
-                            continue;
-                        }
-                        if (Directory.GetFiles(subdirectory).Length == 0)
-                        {
-                            UnityEngine.Debug.Log($"{subdirectory}にダミーファイルを生成！");
-                            using (File.Create(dummyFilePath)) { }
-                        }
+                        ApplyBestDummyFileUsageWithPath(subDirectory);
                     }
                 }
             }

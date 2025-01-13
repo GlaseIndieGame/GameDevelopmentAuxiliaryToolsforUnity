@@ -50,7 +50,7 @@ namespace GDAT.Editor
 
         const string MENU_ROOT = @"Tools/GDATforUnity/";
 
-        [MenuItem(MENU_ROOT + "TextReplaceEditorWindow")]
+        [MenuItem(MENU_ROOT + "TextReplaceEditorWindow", priority = 50)]
         private static void Window()
         {
             window = GetWindow<TextReplaceEditorWindow>();

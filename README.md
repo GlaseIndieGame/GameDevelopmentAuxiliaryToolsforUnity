@@ -1,38 +1,40 @@
 ## REAME
 
 Unityでの快適なゲーム開発を支援するエディタツールです。
-以下に内包するエディターツールの名称とその概要を示します。
+下記から内包するエディターツールの名称とその概要をご覧ください。
 
-ご使用される場合はUnityツールバーの
-Tools/GameDevelopmentAuxiliaryToolsforUnity.Editor/に存在する同様の名称をクリックすることで使用することができます。
+ご使用される場合はツールバーの
+`Tools/GDATforUnity/`(以降、所属ツールのはじめに「T/」と記載)もしくは
+`Assets/Tools/GDATforUnity`(以降、所属ツールのはじめに「A/」と記載)に
+存在する同名のツールからご利用いただけます。
 
-![ツールバーイメージ](Images/ToolBarRoot.png)
+> ![ツールメニュー](Images/ToolMenu.png)
+> ![アセットメニュー](Images/AssetMenu.png)
 
-#### ApplyBestDummyFileUsage
-Assetsフォルダ以下におけるdummyファイルの取り扱いを便利に行えるツールです。
+#### A/ApplyBestDummyFileUsage
+選択されたフォルダ以下に
+適切なダミーファイルの使用状態を適用します。
 
 空のフォルダにはdummyファイルを追加・
 dummyファイル以外があるフォルダからは削除を行います。
 
-このようなファイルがあったとき
-![参考１](Images/DUMMY_1.png)
+使用前→使用後
+> ![使用前](Images/Dummy_B.png)
+> ![使用後](Images/Dummy_A.png)
 
-生成
-![参考２](Images/DUMMY_2.png)
-
-有用な使い方の例
+使い方の例
 - 進捗共有前
 - 作品提出前
 
-#### CreateGenericFolders
+#### A/Add Generic Folders
 ProjectViewにて選択されているフォルダ(複数可)に
 汎用的なフォルダ(Scripts/Textures/etc...)を追加します。
 
-選択してから
-![参考１](Images/GENERIC_1.png)
+使用前→使用後
+![使用前](Images/Generic_B.png)
 
 生成
-![参考2](Images/GENERIC_2.png)
+![使用後](Images/Generic_A.png)
 
 有用な使い方の例
 - プロジェクト立ち上げ時の一括フォルダ作成

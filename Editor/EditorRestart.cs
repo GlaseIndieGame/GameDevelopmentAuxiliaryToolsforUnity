@@ -11,7 +11,7 @@ namespace GDAT.Editor
         /// <summary>
         /// UnityEditor‚ğÄ‹N“®
         /// </summary>
-        [MenuItem("Tools/GDATforUnity/Restart", priority = 11)]
+        [MenuItem("Tools/GDATforUnity/Restart", priority = 75)]
         static void RestartEditor() => EditorApplication.OpenProject(Directory.GetCurrentDirectory());
     }
 }
