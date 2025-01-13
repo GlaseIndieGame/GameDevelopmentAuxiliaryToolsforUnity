@@ -48,7 +48,7 @@ namespace GDAT.Editor
 
         private static TextReplaceEditorWindow window;
 
-        const string MENU_ROOT = @"Tools/GameDevelopmentAuxiliaryToolsforUnity/";
+        const string MENU_ROOT = @"Tools/GDATforUnity/";
 
         [MenuItem(MENU_ROOT + "TextReplaceEditorWindow")]
         private static void Window()
