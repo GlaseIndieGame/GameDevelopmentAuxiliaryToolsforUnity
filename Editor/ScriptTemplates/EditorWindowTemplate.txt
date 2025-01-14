@@ -1,14 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 #ROOTNAMESPACEBEGIN#
+    /// <summary>
+    /// クラスの説明
+    /// </summary>
 	public class #SCRIPTNAME# : EditorWindow
-	{
+    {
         [MenuItem("Window/CustomWindow/#SCRIPTNAME#")]
-    	private static void Window()
-    	{
-        	var window = GetWindow<#SCRIPTNAME#>();
-        	window.Show();
-    	}
-	}
+        private static void Window()
+        {
+            var window = GetWindow<#SCRIPTNAME#>();
+            window.minSize = new Vector2(0, 0);
+            window.Show();
+        }
+
+        // Window起動時に呼ばれる
+        private void OnEnable()
+        {
+            Init();
+            OnSelectionChange();
+        }
+
+        // UnityEditorに更新があったとき呼ばれる
+        private void OnSelectionChange()
+        {
+            Update();
+        }
+
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        private void Init()
+        {
+            
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        private void Update()
+        {
+            
+        }
+    }
 #ROOTNAMESPACEEND#

@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Label tabindex="-1" text="▼テキストファイルを選択してください" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+    <ui:VisualElement name="settingsContainer" style="flex-grow: 1;" />
+    <ui:VisualElement name="toolButtons" style="flex-direction: row;">
+        <ui:Button text="同名のテンプレートを削除" parse-escape-sequences="true" display-tooltip-when-elided="true" name="removeTemplateButton" style="width: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        <ui:Button text="テンプレートを追加" parse-escape-sequences="true" display-tooltip-when-elided="true" name="addTemplateButton" style="width: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

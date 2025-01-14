@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using UnityEditor;
 
 namespace GDAT.Editor
@@ -15,16 +14,19 @@ namespace GDAT.Editor
         private const string MENU_ROOT = "Assets/Tools/GDATforUnity/Add New Script/";
         private const string EDITOR_MENU_ROOT = "Assets/Tools/GDATforUnity/Add New Editor Script/";
 
+        private const int SCRIPT_PRIORITY = 15;
+        private const int EDITOR_SCRIPT_PRIORITY = 17;
+
         // インターフェースのテンプレートファイル名
         private const string INTERFACE_TEMPLATE_FILE_NAME = "InterfaceTemplate.txt";
         private const string PURECYSHARP_TEMPLATE_FILE_NAME = "PureCysharpTemplate.txt";
         private const string UNITY_SINGLETON_TEMPLATE_FILE_NAME = "UnitySingletonTemplate.txt";
-        private const string EDITORWINDOW_TEMPLATE_FILE_NAME = "EditorWindowTemplate.txt";
         private const string SCRIPTABLEOBJECT_TEMPLATE_FILE_NAME = "ScriptableObjectTemplate.txt";
-        private const int SCRIPT_PRIORITY = 15;
-        private const int EDITOR_SCRIPT_PRIORITY = 17;
+
+        private const string EDITORWINDOW_TEMPLATE_FILE_NAME = "EditorWindowTemplate.txt";
 
         // エディタに表示される項目の場所と表示名を設定する
+        /// <summary>Interfaceテンプレートからスクリプトを生成</summary>
         [MenuItem(MENU_ROOT + "Interface", priority = SCRIPT_PRIORITY)]
         private static void CreateInterfaceScript() => CreateScriptFile(INTERFACE_TEMPLATE_FILE_NAME, "NewInterfaceScript.cs");
 
@@ -37,12 +39,12 @@ namespace GDAT.Editor
         private static void CreateUnitySingletonScript() => CreateScriptFile(UNITY_SINGLETON_TEMPLATE_FILE_NAME, "NewUnitySingletonScript.cs");
 
         // エディタに表示される項目の場所と表示名を設定する
-        [MenuItem(EDITOR_MENU_ROOT + "EditorWindow", priority = EDITOR_SCRIPT_PRIORITY)]
-        private static void CreateEditorWindowScript() => CreateScriptFile(EDITORWINDOW_TEMPLATE_FILE_NAME, "NewEditorWindowScript.cs");
-
-        // エディタに表示される項目の場所と表示名を設定する
         [MenuItem(MENU_ROOT + "ScriptableObject", priority = SCRIPT_PRIORITY)]
         private static void CreateScriptableObjectWindowScript() => CreateScriptFile(SCRIPTABLEOBJECT_TEMPLATE_FILE_NAME, "NewScriptableObjectScript.cs");
+
+        // エディタに表示される項目の場所と表示名を設定する
+        [MenuItem(EDITOR_MENU_ROOT + "EditorWindow", priority = EDITOR_SCRIPT_PRIORITY)]
+        private static void CreateEditorWindowScript() => CreateScriptFile(EDITORWINDOW_TEMPLATE_FILE_NAME, "NewEditorWindowScript.cs");
 
         /// <summary>
         /// テンプレートファイルを元に新しいスクリプトを作成する
