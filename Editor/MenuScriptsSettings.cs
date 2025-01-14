@@ -60,19 +60,16 @@ namespace GDAT.Editor
         /// <summary>
         /// ソースファイルのパスを取得
         /// </summary>
-        /// <param name="sourceFilePath"></param>
-        /// <returns></returns>
-        private static string GetSourceFilePathForUnity([CallerFilePath] string sourceFilePath = "")
+        /// <param name="sourceFilePath">コンパイル時に解釈</param>
+        /// <returns>Unityで利用可能な相対パス</returns>
+        private static string GetSourceFilePathForUnity([System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "")
         {
-            sourceFilePath = sourceFilePath.Replace(System.IO.Directory.GetCurrentDirectory(), ".");
-            sourceFilePath = sourceFilePath.Replace(@".\", "");
-            var directoryNames = sourceFilePath.Split(new char[] { '/', @"\"[0] });
-
-            if (directoryNames[0] == "Assets") { return string.Join(@"\", directoryNames); }
-            directoryNames[0] = "";
-            directoryNames[1] = "Packages";
-            directoryNames[2] = directoryNames[2].Substring(0, directoryNames[2].IndexOf('@'));
-            return string.Join(@"\", directoryNames)[1..];
+            if (sourceFilePath[0] != '.') { return sourceFilePath; }
+            sourceFilePath = sourceFilePath[23..];  // ".\Library\PackageCache\"を削除
+            string packageName = sourceFilePath.Substring(0, sourceFilePath.IndexOf('@'));
+            int delimiterIndex = sourceFilePath.IndexOf(@"\"[0]);
+            sourceFilePath = sourceFilePath.Substring(delimiterIndex, sourceFilePath.Length - delimiterIndex);
+            return @"Packages\" + packageName + sourceFilePath;
         }
     }
 }
