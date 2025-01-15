@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:VisualElement name="rootContainer" style="flex-grow: 1;">
         <ui:Label tabindex="-1" text="▼テキストファイルを選択" parse-escape-sequences="true" display-tooltip-when-elided="true" name="settingTitle" />
-        <ui:VisualElement name="settingsContainer" style="flex-grow: 0; height: auto; max-height: 50%;" />
-        <ui:VisualElement name="descriptionContainer" style="flex-grow: 1; margin-bottom: 5px; top: -20px;">
-            <ui:Foldout text="説明を表示" name="descriptionFoldout" value="false" style="flex-grow: 1;">
+        <ui:VisualElement name="settingsContainer" style="flex-grow: 0; height: auto; max-height: 45%;" />
+        <ui:VisualElement name="descriptionContainer" style="flex-grow: 1; margin-bottom: 15px; top: -5px;">
+            <ui:Foldout text="説明を表示" name="descriptionFoldout" style="flex-grow: 1;">
                 <ui:ScrollView style="margin-left: -10px;">
                     <ui:Label tabindex="-1" text="ここではスクリプトテンプレートを追加することができます。&#10;&lt;size=4&gt; &lt;/size&gt;&#10;・エディター?&#10;　ここにチェックを入れるとエディターテンプレートとして認識されます。&#10;・テンプレート名&#10;　メニュー等でテンプレートの名称として利用されます。&#10;・テンプレートパス&#10;　テンプレートテキストファイルのパスを指定します。&#10;　Projectウィンドウにて選択することで自動入力が行われます。" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-grow: 1; white-space: normal; padding-right: 2px;" />
                 </ui:ScrollView>
