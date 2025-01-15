@@ -1,8 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <ui:Label tabindex="-1" text="▼テキストファイルを選択してください" parse-escape-sequences="true" display-tooltip-when-elided="true" />
-    <ui:VisualElement name="settingsContainer" style="flex-grow: 1;" />
-    <ui:VisualElement name="toolButtons" style="flex-direction: row;">
-        <ui:Button text="同名のテンプレートを削除" parse-escape-sequences="true" display-tooltip-when-elided="true" name="removeTemplateButton" style="width: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-        <ui:Button text="テンプレートを追加" parse-escape-sequences="true" display-tooltip-when-elided="true" name="addTemplateButton" style="width: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+    <ui:VisualElement name="rootContainer" style="flex-grow: 1;">
+        <ui:Label tabindex="-1" text="▼テキストファイルを選択" parse-escape-sequences="true" display-tooltip-when-elided="true" name="settingTitle" />
+        <ui:VisualElement name="settingsContainer" style="flex-grow: 0; height: auto; max-height: 50%;" />
+        <ui:VisualElement name="descriptionContainer" style="flex-grow: 1; margin-bottom: 5px; top: -20px;">
+            <ui:Foldout text="説明を表示" name="descriptionFoldout" value="false" style="flex-grow: 1;">
+                <ui:ScrollView style="margin-left: -10px;">
+                    <ui:Label tabindex="-1" text="ここではスクリプトテンプレートを追加することができます。&#10;&lt;size=4&gt; &lt;/size&gt;&#10;・エディター?&#10;　ここにチェックを入れるとエディターテンプレートとして認識されます。&#10;・テンプレート名&#10;　メニュー等でテンプレートの名称として利用されます。&#10;・テンプレートパス&#10;　テンプレートテキストファイルのパスを指定します。&#10;　Projectウィンドウにて選択することで自動入力が行われます。" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-grow: 1; white-space: normal; padding-right: 2px;" />
+                </ui:ScrollView>
+            </ui:Foldout>
+            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="usedTemplateLabel" style="white-space: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="toolButtons" style="flex-direction: row; bottom: 0; position: absolute; width: 100%;">
+            <ui:Button text="同名のテンプレートを削除" parse-escape-sequences="true" display-tooltip-when-elided="true" name="removeTemplateButton" style="width: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgb(166, 0, 0);" />
+            <ui:Button text="テンプレートを追加" parse-escape-sequences="true" display-tooltip-when-elided="true" name="addTemplateButton" style="width: 50%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgb(55, 166, 0);" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

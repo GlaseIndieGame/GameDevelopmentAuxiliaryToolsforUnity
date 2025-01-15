@@ -42,6 +42,8 @@ namespace GDAT.Editor
 
         private readonly Encoding SHIFTJIS_ENCODING = Encoding.GetEncoding("shift-jis");
 
+        private Label _usedTemplateLabel;
+
         [SerializeField]
         private MonoScript _targetScript;
 
@@ -82,6 +84,8 @@ namespace GDAT.Editor
         {
             var root = this.rootVisualElement;
             _visualTreeAsset.CloneTree(root);
+
+            _usedTemplateLabel = root.Q<Label>("usedTemplateLabel");
 
             var serializeTarget = new SerializedObject(this);
             rootVisualElement.Bind(serializeTarget);
@@ -126,6 +130,7 @@ namespace GDAT.Editor
                                 property.BindProperty(fieldProperty);
                             }
                         });
+                    isEditorColumn.minWidth = 60;
                     isEditorColumn.maxWidth = 60;
 
                     var nameColumn = CreateColumn("Name", "テンプレート名",
@@ -143,9 +148,10 @@ namespace GDAT.Editor
                                 property.BindProperty(fieldProperty);
                             }
                         });
+                    nameColumn.minWidth = 120;
                     nameColumn.maxWidth = 120;
 
-                    var pathColumn = CreateColumn("Path", "使用テンプレートを選択",
+                    var pathColumn = CreateColumn("Path", "テンプレートパス",
                         () => new TextField()
                         {
                             label = "",
@@ -167,6 +173,8 @@ namespace GDAT.Editor
 
                 settingsContainer.Add(listView);
             }
+
+            UpdateUsedTemplateLabel();
 
             var addTemplateButton = root.Q<Button>("addTemplateButton");
             {
@@ -194,6 +202,11 @@ namespace GDAT.Editor
         }
 
         /// <summary>
+        /// 使用中のテンプレートをラベルに表示
+        /// </summary>
+        private void UpdateUsedTemplateLabel() => _usedTemplateLabel.text = $"\"Templates\": [{string.Join(", ", GetUsedTemplateName(ReadTargetCode()[0]))}]";
+
+        /// <summary>
         /// 更新
         /// </summary>
         private void Update()
@@ -217,6 +230,12 @@ namespace GDAT.Editor
             }
         }
 
+        private string[] GetUsedTemplateName(string data)
+        {
+            data = data[(data.IndexOf(':') + 1)..];
+            return data.Split(',');
+        }
+
         /// <summary>
         /// テンプレートを追加
         /// </summary>
@@ -230,9 +249,8 @@ namespace GDAT.Editor
 
             var data = ReadTargetCode();
 
-            string temp = data[0];
-            temp = temp[(temp.IndexOf(':') + 1)..];
-            var readTemplateNames = temp.Split(',');
+            string temp;
+            string[] readTemplateNames = GetUsedTemplateName(data[0]);
 
             foreach (var settings in _templateSettings)
             {
@@ -266,6 +284,7 @@ namespace GDAT.Editor
             }
 
             WriteTargetCode(data);
+            UpdateUsedTemplateLabel();
         }
 
         /// <summary>
@@ -297,6 +316,7 @@ namespace GDAT.Editor
             }
 
             WriteTargetCode(data);
+            UpdateUsedTemplateLabel();
         }
 
         /// <summary>ターゲットスクリプトのパスを取得</summary>

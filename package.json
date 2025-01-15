@@ -1,6 +1,6 @@
 {
     "name": "com.glase.gamedevelopmentauxiliarytools",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "These are editor tools that assist in comfortable game development in Unity.",
     "displayName": "GameDevelopmentAuxiliaryTools",
     "unity": "2022.1",
